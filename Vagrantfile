@@ -64,9 +64,10 @@ Vagrant.configure("2") do |config|
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
    config.vm.provision "shell", inline: <<-SHELL
-     echo 'deb http://apt.postgresql.org/pub/repos/apt/dists/bionic-pgdg main' >> /etc/apt/sources.list.d/pgdg.list
-     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+     echo 'deb http://apt.postgresql.org/pub/repos/apt bionic-pgdg main' >> /etc/apt/sources.list.d/pgdg.list
+     wget -O psql.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc 
+	   sudo apt-key add psql.asc
      apt-get update
-     apt-get install postgresql-8.4
+     apt-get install postgresql-8.4 -y
    SHELL
 end
